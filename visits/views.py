@@ -4,12 +4,16 @@ from .models import Visit
 
 
 
-def index(request):
-    v = Visit.objects.first()
-    v.count += 1
+def index(request, page=''):
+    v = Visit(page = page)
+    if request.user.is_authenticated:
+        v.username = request.user.username
     v.save()
+    visitors = Visit.objects.filter(page = page)
     context = {
-        'count': v.count,
+        'count': visitors.count(),
+        'page' : page,
+        'visitors' : visitors,
         'name' : 'Django Unchained',
     }
     return render (request, 'index.html', context = context)

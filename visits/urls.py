@@ -6,4 +6,6 @@ app_name = 'visit'
 
 urlpatterns = [
     path('', views.index, name= 'index'),
+    path('<str:page>', views.index, name = 'index'), 
+
 ]

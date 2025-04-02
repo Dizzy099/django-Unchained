@@ -1,10 +1,24 @@
-<!DOCTYPE html>
-<html lang ="en">
-    <head>
-                <title>Visits Counter</title>
-    </head>
-    <body>
-                     <h1>Your name is {{name}} </h1>
-                     <h2>Your Visit count is {{ count }} time{{count|pluralize }}</h2>
-    </body>
+{% load static %}
+<html>
+<head>
+  <title>DJ test</title>
+  <link rel="icon" href="{% static 'favicon.ico' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'styles.css' %}">
+</head>
+<body>
+    <h1>
+        <img src="{% static 'logo.png' %}" alt="Logo"> 
+        {% if page %} 
+            {{ page|title }} 
+        {% else %} 
+            Hello, World Django 
+        {% endif %}
+    </h1>
+  <p>I've been visited {{ count }} time{{ count|pluralize }}</p>
+  <ul>
+    {% for visit in visitors %}
+    <li>{{ visit.username }} at {{ visit.timestamp }}</li>
+    {% endfor %}
+  </ul>
+</body>
 </html>
